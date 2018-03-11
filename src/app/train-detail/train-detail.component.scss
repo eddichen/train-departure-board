@@ -1,0 +1,14 @@
+.departure-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+    &__item {
+        display: table;
+    }
+
+    &__col {
+        display: table-cell;
+        padding: 10px;
+    }
+}

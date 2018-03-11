@@ -1,0 +1,22 @@
+<div *ngIf="trains">
+  <h1>{{ trains.locationName }}</h1>
+
+  <ul class="departure-list">
+    <li class="departure-list__header">
+      <div class="departure-list__item">
+        <p class="departure-list__col">Due</p>
+        <p class="departure-list__col">Destination</p>
+        <p class="departure-list__col">Platform</p>
+        <p class="departure-list__col">Expected</p>
+      </div>
+    </li>
+    <li *ngFor="let train of trains.trainServices">
+      <div class="departure-list__item">
+        <p class="departure-list__col">{{ train.std }}</p>
+        <p class="departure-list__col">{{ train.destination[0].locationName }}</p>
+        <p class="departure-list__col">Platform {{ train.platform }}</p>
+        <p class="departure-list__col">{{ train.etd }}</p>
+      </div>
+    </li>
+  </ul>
+</div>
