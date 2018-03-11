@@ -14,7 +14,7 @@
       <div class="departure-list__item">
         <p class="departure-list__col">{{ train.std }}</p>
         <p class="departure-list__col">{{ train.destination[0].locationName }}</p>
-        <p class="departure-list__col">Platform {{ train.platform }}</p>
+        <p class="departure-list__col"><span *ngIf="train.platform">Platform </span>{{ train.platform }}</p>
         <p class="departure-list__col">{{ train.etd }}</p>
       </div>
     </li>

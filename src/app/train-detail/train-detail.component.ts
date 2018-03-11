@@ -76,6 +76,10 @@ export class TrainDetailComponent implements OnInit {
 
   ngOnInit() {
     this.setTrainTimes();
+    
+    setInterval(() => {
+      this.setTrainTimes();
+    }, 60000);
   }
 
   setTrainTimes() {
