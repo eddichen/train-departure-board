@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainTimetableService } from '../train-timetable.service';
+import * as moment from 'moment';
 
 export interface Station {
   areServicesAvailable: boolean;
@@ -73,16 +74,13 @@ export class TrainDetailComponent implements OnInit {
   ) { }
 
   trains: {};
+  timeToLeave: number;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setTrainTimes();
-    
-    setInterval(() => {
-      this.setTrainTimes();
-    }, 60000);
   }
 
-  setTrainTimes() {
+  setTrainTimes(): void {
     this.trainTimetableService.getTrainTimes()
       .subscribe(resp => {
         console.log(resp);
@@ -93,4 +91,19 @@ export class TrainDetailComponent implements OnInit {
       })
   }
 
+  departureTime(trainDepartureTime, trainExpectedTime): string {
+    let splitDepartureTime;
+    if (trainExpectedTime && trainExpectedTime !== 'On time') {
+      splitDepartureTime = this.splitTime(trainExpectedTime);
+    }
+    else if (trainDepartureTime) {
+      splitDepartureTime = this.splitTime(trainDepartureTime);
+    }
+    let trainDepartureDate = moment().hour(splitDepartureTime[0]).minute(splitDepartureTime[1]);
+    return moment(trainDepartureDate).toNow(true);
+  }
+
+  splitTime(time): Array<string> {
+    return time.split(/:/g, 2);
+  }
 }
