@@ -2,9 +2,14 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+
+    &__title {
+        text-align: center
+    }
     
     &__item {
         display: table;
+        width: 100%;
     }
 
     &__col {

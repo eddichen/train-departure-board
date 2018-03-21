@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { TrainDetailComponent } from './train-detail.component';
+import { TrainTimetableService } from '../train-timetable.service';
 
 describe('TrainDetailComponent', () => {
   let component: TrainDetailComponent;
@@ -8,7 +11,15 @@ describe('TrainDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrainDetailComponent ]
+      declarations: [ 
+        TrainDetailComponent
+      ],
+      imports: [
+        HttpClientModule
+      ],
+      providers: [
+        TrainTimetableService
+      ]
     })
     .compileComponents();
   }));

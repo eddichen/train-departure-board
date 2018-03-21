@@ -1,34 +1,42 @@
 <div *ngIf="trains">
-  <h1>{{ trains.locationName }}</h1>
+  <h1 class="departure-list__title">{{ trains.locationName }}</h1>
 
   <ul class="departure-list">
-    <li class="departure-list__header">
-    
-    </li>
     <li *ngFor="let train of trains.trainServices; let i = index">
       <div class="departure-list__item" *ngIf="i==0">
-        <p class="departure-list__col">{{ train.std }}</p>
-        <p class="departure-list__col">{{ train.destination[0].locationName }}</p>
-        <p class="departure-list__col"><span *ngIf="train.platform">Platform </span>{{ train.platform }}</p>
-        <p class="departure-list__col">{{ train.etd }}</p>
-        <p class="departure-list__col">{{ departureTime(train.std) }}</p>
+        <div class="departure-list__col">
+            <p>{{ train.std }}</p>
+            <p>{{ train.etd }}</p>
+        </div>
+        <div class="departure-list__col">
+            <p>{{ train.destination[0].locationName }}</p>
+        </div>
+        <div class="departure-list__col">
+          <p><span *ngIf="train.platform">Platform </span>{{ train.platform }}</p>
+        </div>
+        <div class="departure-list__col">
+          <p>{{ departureTime(train.std, train.etd) }}</p>
+        </div>
       </div>
       <div *ngIf="i>0">
-        <div class="departure-list__item" *ngIf="i==1">
-          <p class="departure-list__col">Due</p>
-          <p class="departure-list__col">Destination</p>
-          <p class="departure-list__col">Expected</p>
+        <div class="departure-list__item grid-x" *ngIf="i==1">
+          <div class="departure-list__col cell small-3">Due</div>
+          <div class="departure-list__col cell auto">Destination</div>
+          <div class="departure-list__col cell small-3">Expected</div>
         </div>
-        <div class="departure-list__item">
-          <p class="departure-list__col">{{ train.std }}</p>
-          <p class="departure-list__col">{{ train.destination[0].locationName }}</p>
-          <p class="departure-list__col">{{ train.etd }}</p>
-          <p class="departure-list__col">{{ departureTime(train.std, train.etd) }}</p>
+        <div class="departure-list__item grid-x">
+          <div class="departure-list__col cell small-3">
+            <p>{{ train.std }}</p>
+            <p>{{ train.etd }}</p>
+          </div>
+          <div class="departure-list__col cell auto">
+            <p>{{ train.destination[0].locationName }}</p>
+          </div>
+          <div class="departure-list__col cell small-3">
+            <p>{{ departureTime(train.std, train.etd) }}</p>
+          </div>
         </div>
       </div>
-      
     </li>
   </ul>
-
-  <button (click)="this.setTrainTimes()">Refresh</button>
 </div>
