@@ -77,6 +77,25 @@ export class TrainDetailComponent implements OnInit {
   timeToLeave: number;
 
   ngOnInit(): void {
+    moment.updateLocale('en', {
+      relativeTime : {
+          future: "in %s",
+          past:   "%s ago",
+          s  : 'a few seconds',
+          ss : '%d secs',
+          m:  "1 min",
+          mm: "%d min",
+          h:  "1 hr",
+          hh: "%d hrs",
+          d:  "a day",
+          dd: "%d days",
+          M:  "a month",
+          MM: "%d months",
+          y:  "a year",
+          yy: "%d years"
+      }
+  });
+
     this.setTrainTimes();
   }
 
@@ -94,13 +113,13 @@ export class TrainDetailComponent implements OnInit {
   departureTime(trainDepartureTime, trainExpectedTime): string {
     let splitDepartureTime;
     if (trainExpectedTime && trainExpectedTime !== 'On time') {
-      splitDepartureTime = this.splitTime(trainExpectedTime);
+      return trainExpectedTime;
     }
-    else if (trainDepartureTime) {
+    else {
       splitDepartureTime = this.splitTime(trainDepartureTime);
+      let trainDepartureDate = moment().hour(splitDepartureTime[0]).minute(splitDepartureTime[1]);
+      return moment(trainDepartureDate).toNow(true);
     }
-    let trainDepartureDate = moment().hour(splitDepartureTime[0]).minute(splitDepartureTime[1]);
-    return moment(trainDepartureDate).toNow(true);
   }
 
   splitTime(time): Array<string> {
