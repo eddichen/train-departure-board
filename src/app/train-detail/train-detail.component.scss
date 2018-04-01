@@ -6,23 +6,29 @@
     &__title {
         text-align: center
     }
+
+    &__header {
+        &-title {
+            font-size: 12px;
+        }
+    }
+
+    &__row {
+        &:first-child {
+            margin-bottom: 20px;
+        }
+    }
     
     &__item {
-        display: table;
-        width: 100%;
         border-bottom: 1px solid #000;
 
         &--first {
             border: 0;
         }
-
-        &--header {
-            //color: #D1D1D1;
-        }
     }
 
     &__col {
-        display: table-cell;
-        padding: 15px 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 }

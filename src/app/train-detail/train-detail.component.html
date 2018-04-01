@@ -1,29 +1,44 @@
 <div *ngIf="trains" class="margin-top-1">
   <h1 class="departure-list__title">{{ trains.locationName }}</h1>
   <ul class="departure-list">
-    <li *ngFor="let train of trains.trainServices; let i = index">
+    <li *ngFor="let train of trains.trainServices; let i = index" class="departure-list__row">
       <div *ngIf="i==0">
-        <div class="departure-list__item departure-list__item--first grid-x">
-          <div class="departure-list__col cell small-2">
-              <p class="h3">{{ train.std }}</p>
-          </div>
-          <div class="departure-list__col cell auto">
-              <p class="text-uppercase h3">{{ train.destination[0].locationName }}</p>
-              <p class="margin-bottom-0"><span *ngIf="train.platform">Platform </span>{{ train.platform }}</p>
-          </div>
-          <div class="departure-list__col cell small-3 text-right">
-            <p class="h2">{{ departureTime(train.std, train.etd) }}</p>
+        <div class="grid-x">
+          <div class="cell auto text-center">
+            <p class="departure-list__header-title text-uppercase">Next train departs</p>
+            <p class="stat">{{ departureTime(train.std, train.etd) }}</p>
           </div>
         </div>
-        <app-current-time></app-current-time>
+        <div class="departure-list__header grid-x">
+          <div class="cell small-3 text-center">
+              <p class="departure-list__header-title text-uppercase margin-bottom-0">Departure</p>
+          </div>
+          <div class="cell small-6 text-center">
+              <p class="departure-list__header-title text-uppercase margin-bottom-0">Destination</p>
+          </div>
+          <div class="cell small-3 text-center">
+              <p class="departure-list__header-title text-uppercase margin-bottom-0">Platform</p>
+          </div>
+        </div>
+        <div class="departure-list__item departure-list__item--first grid-x">
+          <div class="cell small-3 text-center">
+              <p class="margin-bottom-0">{{ train.std }}</p>
+          </div>
+          <div class="cell small-6 text-center">
+              <p class="text-uppercase margin-bottom-0">{{ train.destination[0].locationName }}</p>
+          </div>
+          <div class="cell small-3 text-center">
+              <p class="margin-bottom-0"><span *ngIf="train.platform"></span>{{ train.platform }}</p>
+          </div>
+        </div>
       </div>
       <div *ngIf="i>0">
-        <div class="departure-list__item departure-list__item--header grid-x" *ngIf="i==1">
+        <div class="departure-list__item departure-list__item--header grid-x grid-padding-x" *ngIf="i==1">
           <div class="departure-list__col cell small-2">Due</div>
           <div class="departure-list__col cell auto">Destination</div>
           <div class="departure-list__col cell small-3 text-right">Expected</div>
         </div>
-        <div class="departure-list__item grid-x">
+        <div class="departure-list__item grid-x grid-padding-x">
           <div class="departure-list__col cell small-2">
             <p class="margin-bottom-0">{{ train.std }}</p>
           </div>
