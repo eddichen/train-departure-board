@@ -94,7 +94,8 @@ export class TrainDetailComponent implements OnInit {
           y:  "a year",
           yy: "%d years"
       }
-  });
+    });
+    moment.relativeTimeThreshold('m', 59);
 
     this.setTrainTimes();
   }
