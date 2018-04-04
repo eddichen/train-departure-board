@@ -1,5 +1,5 @@
 <div *ngIf="trains" class="margin-top-1">
-  <h1 class="departure-list__title">{{ trains.locationName }}</h1>
+  <h1 class="departure-list__title">{{ trains.locationName }} &rarr; {{ trains.filterLocationName }}</h1>
   <ul class="departure-list">
     <li *ngFor="let train of trains.trainServices; let i = index" class="departure-list__row">
       <div *ngIf="i==0">

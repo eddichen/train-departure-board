@@ -1,0 +1,26 @@
+<form>
+  <label>From</label>
+  <select id="stationFrom" (change)="stationSet($event.target.value, 'from')" required>
+    <option value="">Please select</option>
+    <option value="ctk">City Thameslink</option>
+    <option value="hnh">Herne Hill</option>
+    <option value="lbg">London Bridge</option>
+    <option value="bfr">London Blackfriars</option>
+    <option value="vic">London Victoria</option>
+    <option value="syd">Sydenham</option>
+    <option value="syh">Sydenham Hill</option>
+  </select>
+
+  <label>To</label>
+  <select (change)="stationSet($event.target.value, 'to')" required>
+    <option value="">Please select</option>
+    <option value="ctk">City Thameslink</option>
+    <option value="hnh">Herne Hill</option>
+    <option value="lbg">London Bridge</option>
+    <option value="bfr">London Blackfriars</option>
+    <option value="vic">London Victoria</option>
+    <option value="syd">Sydenham</option>
+    <option value="syh">Sydenham Hill</option>
+  </select>
+  <button type="button" (click)="stationSubmit()">Submit</button>
+</form>

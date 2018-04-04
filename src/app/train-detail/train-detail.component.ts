@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
+
 import { TrainTimetableService } from '../train-timetable.service';
 import * as moment from 'moment';
 
@@ -70,6 +74,7 @@ export interface Origin {
 export class TrainDetailComponent implements OnInit {
 
   constructor(
+    private route: ActivatedRoute,
     private trainTimetableService: TrainTimetableService
   ) { }
 
@@ -81,7 +86,7 @@ export class TrainDetailComponent implements OnInit {
       relativeTime : {
           future: "in %s",
           past:   "%s ago",
-          s  : 'arrived',
+          s  : 'due',
           ss : '%dsecs',
           m:  "1min",
           mm: "%dmin",
@@ -97,11 +102,13 @@ export class TrainDetailComponent implements OnInit {
     });
     moment.relativeTimeThreshold('m', 59);
 
-    this.setTrainTimes();
+    const stations = this.route.paramMap.subscribe((params: ParamMap) => {
+      this.setTrainTimes(params.get('from'), params.get('to'));
+    })
   }
 
-  setTrainTimes(): void {
-    this.trainTimetableService.getTrainTimes()
+  setTrainTimes(from: string, to: string): void {
+    this.trainTimetableService.getTrainTimes(from, to)
       .subscribe(resp => {
         console.log(resp);
         this.trains = { ...resp };
