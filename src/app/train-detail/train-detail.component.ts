@@ -80,8 +80,10 @@ export class TrainDetailComponent implements OnInit {
 
   trains: {};
   timeToLeave: number;
+  displayLoader: boolean;
 
   ngOnInit(): void {
+    this.showLoader();
     moment.updateLocale('en', {
       relativeTime : {
           future: "in %s",
@@ -105,6 +107,16 @@ export class TrainDetailComponent implements OnInit {
     const stations = this.route.paramMap.subscribe((params: ParamMap) => {
       this.setTrainTimes(params.get('from'), params.get('to'));
     })
+    this.hideLoader();
+  }
+
+  showLoader() {
+    console.log('show loader');
+    this.displayLoader = true;
+  }
+
+  hideLoader() {
+    this.displayLoader = false;
   }
 
   setTrainTimes(from: string, to: string): void {
